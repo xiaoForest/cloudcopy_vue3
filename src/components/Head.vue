@@ -41,6 +41,7 @@ defineProps({
 .headWrap {
   width: 100%;
   padding: 20px;
+  height: 80px;
   border-bottom: 1px #f0f0f0 solid;
   display: flex;
   justify-content: space-between;

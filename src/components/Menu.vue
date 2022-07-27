@@ -165,7 +165,7 @@ const onSubmit = () => {
 <style lang="scss" scoped>
 .MenuWrap {
   width: 320px;
-  height: 100vh;
+  height: calc(100vh - 80px);
   border-right: 1px solid #f0f0f0;
   .ant-form {
     padding: 20px;
