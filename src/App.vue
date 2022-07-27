@@ -1,5 +1,6 @@
 
 <template>
+  <Head msg="" />
   <Menu msg="" />
 </template>
 
