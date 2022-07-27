@@ -4,8 +4,10 @@
     <a-form layout="inline">
       <a-form-item label="" v-bind="validateInfos.region" style="width: 32%">
         <a-select v-model:value="modelRef.region" placeholder="全部">
-          <a-select-option value="zu">族谱</a-select-option>
-          <a-select-option value="wang">网格</a-select-option>
+          <a-select-option value="1">私有</a-select-option>
+          <a-select-option value="2">公开</a-select-option>
+          <a-select-option value="3">收藏</a-select-option>
+          <a-select-option value="4">分享</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item label="" v-bind="validateInfos.name" style="width: 45%">
