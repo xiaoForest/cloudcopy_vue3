@@ -12,11 +12,16 @@
       <span class="hint">即日起 注册用户可订阅2个以上主题啦</span>
     </div>
     <div class="boxes">
-      <a-button type="primary" shape="circle" size="large">
-        <template #icon><BellOutlined /></template>
-      </a-button>
+      <a-popover title="消息提醒" placement="topRight">
+        <template #content>
+          <div class="1"></div>
+        </template>
+        <a-button type="primary" shape="circle" size="large">
+          <template #icon><BellOutlined /></template>
+        </a-button>
+      </a-popover>
 
-      <a-popover title="个人配置" placement="topLeft">
+      <a-popover title="个人配置" placement="topRight">
         <template #content>
           <div class="item">
             <p>每日图片推送</p>
@@ -59,7 +64,7 @@
       <a-popover
         v-else
         title="您好用户"
-        placement="topLeft"
+        placement="topRight"
         v-model:visibleUser="visibleUser"
       >
         <template #content>
@@ -104,6 +109,10 @@ defineProps({
   msg: String,
 });
 
+// 消息 S
+const visibleMessage = ref(false);
+// 消息 A
+
 // 个人配置 S
 const checked1 = ref(false);
 const checked2 = ref(false);
@@ -115,7 +124,7 @@ const formatNumber = (value) => {
   const prefix = list[0].charAt(0) === "-" ? "-" : "";
   let num = prefix ? list[0].slice(1) : list[0];
   let result = "";
-
+  
   while (num.length > 3) {
     result = `,${num.slice(-3)}${result}`;
     num = num.slice(0, num.length - 3);
