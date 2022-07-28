@@ -46,9 +46,35 @@
         </a-button>
       </a-popover>
 
-      <a-button type="primary" @click="showModal" shape="circle" size="large">
+      <a-button
+        v-if="showLogIn"
+        type="primary"
+        @click="showModal"
+        shape="circle"
+        size="large"
+      >
         <template #icon><UserOutlined /></template>
       </a-button>
+
+      <a-popover
+        v-else
+        title="您好用户"
+        placement="topLeft"
+        v-model:visibleUser="visibleUser"
+      >
+        <template #content>
+          <div class="userWrap">
+            <div class="img"><img src="../assets/touxiang.jpg" alt="" /></div>
+            <span class="name">小英雄</span>
+          </div>
+          <div class="userItem">
+            <a-button type="dashed" @click="LoggedOut">退出登陆</a-button>
+          </div>
+        </template>
+        <a-button type="primary" shape="circle" size="large">
+          <template #icon><UserOutlined /></template>
+        </a-button>
+      </a-popover>
     </div>
   </div>
 
@@ -61,6 +87,7 @@
     <div class="modalWeChat">
       <img src="../assets/code.jpg" alt="" />
       <p>微信扫码登陆</p>
+      <a-button type="dashed" @click="onLogIn">点我 假装登陆看状态</a-button>
     </div>
   </a-modal>
 </template>
@@ -131,17 +158,25 @@ watch(inputValue, (val, preVal) => {
 // 个人配置 A
 
 // 弹出二维码 S
+const showLogIn = ref(true); // 二维码和已登录切换
 const visible = ref(false);
-
 const showModal = () => {
+  // 点击后弹出二维码
   visible.value = true;
 };
 
-const handleOk = (e) => {
-  console.log(e);
-  visible.value = false;
-};
 // 弹出二维码 A
+
+// 登陆后 S
+const visibleUser = ref(false);
+const onLogIn = () => {
+  visible.value = false;
+  showLogIn.value = false;
+};
+const LoggedOut = () => {
+  showLogIn.value = true;
+};
+// 登陆后 A
 </script>
 
 <style lang="scss" scoped>
@@ -206,5 +241,30 @@ const handleOk = (e) => {
   p {
     font-size: 30px;
   }
+}
+.userWrap {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .img {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .name {
+    margin: 5px 0;
+  }
+}
+.userItem {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
