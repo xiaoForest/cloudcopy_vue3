@@ -15,9 +15,37 @@
       <a-button type="primary" shape="circle" size="large">
         <template #icon><BellOutlined /></template>
       </a-button>
-      <a-button type="primary" shape="circle" size="large">
-        <template #icon><SettingOutlined /></template>
-      </a-button>
+
+      <a-popover title="个人配置" placement="topLeft">
+        <template #content>
+          <div class="item">
+            <p>每日图片推送</p>
+            <a-switch v-model:checked="checked1" />
+          </div>
+          <div class="item">
+            <p>评论回复通知</p>
+            <a-switch v-model:checked="checked2" />
+          </div>
+          <div class="item">
+            <p>显示搜索工具栏</p>
+            <a-switch v-model:checked="checked3" />
+          </div>
+          <div class="item">
+            <p>默认有效时长(分钟)</p>
+            <a-input
+              v-model:value="inputValue"
+              placeholder="Input a number"
+              :max-length="25"
+              @blur="onBlur"
+              style="width: 60px; text-align: center"
+            />
+          </div>
+        </template>
+        <a-button type="primary" shape="circle" size="large">
+          <template #icon><SettingOutlined /></template>
+        </a-button>
+      </a-popover>
+
       <a-button type="primary" shape="circle" size="large">
         <template #icon><UserOutlined /></template>
       </a-button>
@@ -26,14 +54,66 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import {
   BellOutlined,
   SettingOutlined,
   UserOutlined,
+  DownOutlined,
 } from "@ant-design/icons-vue";
 defineProps({
   msg: String,
+});
+
+const checked1 = ref(false);
+const checked2 = ref(false);
+const checked3 = ref(false);
+
+const formatNumber = (value) => {
+  value += "";
+  const list = value.split(".");
+  const prefix = list[0].charAt(0) === "-" ? "-" : "";
+  let num = prefix ? list[0].slice(1) : list[0];
+  let result = "";
+
+  while (num.length > 3) {
+    result = `,${num.slice(-3)}${result}`;
+    num = num.slice(0, num.length - 3);
+  }
+
+  if (num) {
+    result = num + result;
+  }
+
+  return `${prefix}${result}${list[1] ? `.${list[1]}` : ""}`;
+};
+const inputValue = ref("10");
+const formatValue = computed(() => {
+  if (inputValue.value === "-") return "-";
+  return formatNumber(inputValue.value);
+});
+
+const format = (val, preVal) => {
+  const reg = /^-?\d*(\.\d*)?$/;
+
+  if ((!isNaN(+val) && reg.test(val)) || val === "" || val === "-") {
+    inputValue.value = val;
+  } else {
+    inputValue.value = preVal;
+  }
+}; // '.' at the end or only '-' in the input box.
+
+const onBlur = () => {
+  if (
+    inputValue.value.charAt(inputValue.value.length - 1) === "." ||
+    inputValue.value === "-"
+  ) {
+    format(inputValue.value.slice(0, -1), inputValue.value);
+  }
+};
+
+watch(inputValue, (val, preVal) => {
+  format(val, preVal);
 });
 </script>
 
@@ -69,8 +149,23 @@ defineProps({
     }
     .hint {
     }
-    button {
+    .ant-btn {
       margin-right: 15px;
+    }
+  }
+}
+.ant-popover-inner-content {
+  .item {
+    margin-bottom: 1em;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    p {
+      margin: 0;
     }
   }
 }
