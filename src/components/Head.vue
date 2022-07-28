@@ -209,8 +209,6 @@ const LoggedOut = () => {
         display: block;
       }
     }
-    .hint {
-    }
     .ant-btn {
       margin-right: 15px;
     }
