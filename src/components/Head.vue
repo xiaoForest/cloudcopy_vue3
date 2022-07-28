@@ -46,15 +46,27 @@
         </a-button>
       </a-popover>
 
-      <a-button type="primary" shape="circle" size="large">
+      <a-button type="primary" @click="showModal" shape="circle" size="large">
         <template #icon><UserOutlined /></template>
       </a-button>
     </div>
   </div>
+
+  <a-modal
+    v-model:visible="visible"
+    title="微信登陆"
+    @ok="handleOk"
+    :footer="null"
+  >
+    <div class="modalWeChat">
+      <img src="../assets/code.jpg" alt="" />
+      <p>微信扫码登陆</p>
+    </div>
+  </a-modal>
 </template>
 
 <script setup>
-import { computed, defineComponent, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import {
   BellOutlined,
   SettingOutlined,
@@ -65,6 +77,7 @@ defineProps({
   msg: String,
 });
 
+// 个人配置 S
 const checked1 = ref(false);
 const checked2 = ref(false);
 const checked3 = ref(false);
@@ -115,6 +128,20 @@ const onBlur = () => {
 watch(inputValue, (val, preVal) => {
   format(val, preVal);
 });
+// 个人配置 A
+
+// 弹出二维码 S
+const visible = ref(false);
+
+const showModal = () => {
+  visible.value = true;
+};
+
+const handleOk = (e) => {
+  console.log(e);
+  visible.value = false;
+};
+// 弹出二维码 A
 </script>
 
 <style lang="scss" scoped>
@@ -167,6 +194,17 @@ watch(inputValue, (val, preVal) => {
     p {
       margin: 0;
     }
+  }
+}
+.modalWeChat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 300px;
+  }
+  p {
+    font-size: 30px;
   }
 }
 </style>
