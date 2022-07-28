@@ -1,7 +1,10 @@
 
 <template>
-  <Head msg="" />
-  <Menu msg="" />
+  <Head />
+  <NavigationBar />
+  <div>
+    <Menu />
+  </div>
 </template>
 
 <script setup>
