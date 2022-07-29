@@ -22,11 +22,38 @@
         </a-form-item>
       </a-form>
     </div>
+    <div class="infoWrap">
+      <div class="companyList">
+        <a target="_blank" href="https://cn.vuejs.org/index.html" class="items">
+          <img src="../assets/vue.svg" alt="" />
+          <span>Vue.js</span>
+        </a>
+        <a target="_blank" href="https://cn.vuejs.org/index.html" class="items">
+          <img src="../assets/vue.svg" alt="" />
+          <span>Vue.js</span>
+        </a>
+        <a target="_blank" href="https://cn.vuejs.org/index.html" class="items">
+          <img src="../assets/vue.svg" alt="" />
+          <span>Vue.js</span>
+        </a>
+        <a target="_blank" href="https://cn.vuejs.org/index.html" class="items">
+          <img src="../assets/vue.svg" alt="" />
+          <span>Vue.js</span>
+        </a>
+      </div>
+      <a-button @click="addNav" type="text">
+        <PlusOutlined style="color: #fff; font-size: 20px"
+      /></a-button>
+    </div>
   </section>
+
+  <a-modal v-model:visible="visible" title="Basic Modal" @ok="handleOk">
+    <p>开发中</p>
+  </a-modal>
 </template>
 <script setup>
 import { ref, reactive, toRaw } from "vue";
-import { SearchOutlined } from "@ant-design/icons-vue";
+import { SearchOutlined, PlusOutlined } from "@ant-design/icons-vue";
 import { Form } from "ant-design-vue";
 const useForm = Form.useForm;
 defineProps({
@@ -59,6 +86,15 @@ const value = ref({
   value: "google",
 });
 
+const visible = ref(false);
+const addNav = () => {
+  visible.value = true;
+};
+const handleOk = (e) => {
+  console.log(e);
+  visible.value = false;
+};
+
 const onSubmit = () => {
   console.log(value.value.value);
   console.log(valueText.value);
@@ -67,7 +103,7 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .navigationBarWrap {
-  height: 140px;
+  height: 200px;
   background-color: #1890ff;
   display: flex;
   flex-direction: column;
@@ -77,11 +113,31 @@ const onSubmit = () => {
     display: inline-block;
     padding: 15px;
     margin: 0 auto;
-    background-color: #fff;
+
     .ant-form {
       .ant-row {
-        &:last-child {
-          margin-right: 0;
+        margin: 2px;
+      }
+    }
+  }
+  .infoWrap {
+    display: flex;
+    align-items: center;
+
+    .companyList {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      .items {
+        margin: 0 15px;
+        display: flex;
+        align-items: center;
+        img {
+          width: 30px;
+        }
+        span {
+          margin-left: 6px;
+          color: #fff;
         }
       }
     }
