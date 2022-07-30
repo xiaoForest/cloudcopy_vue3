@@ -47,13 +47,78 @@
     </div>
   </section>
 
-  <a-modal v-model:visible="visible" title="Basic Modal" @ok="handleOk">
-    <p>开发中</p>
+  <a-modal v-model:visible="visible" title="快捷导航" :footer="null">
+    <a-form
+      ref="formRef"
+      :model="formState"
+      name="dynamic_rule"
+      v-bind="formItemLayout"
+    >
+      <a-form-item
+        label="URL"
+        name="url"
+        :rules="[{ required: true, message: 'Please input your url!' }]"
+      >
+        <a-input v-model:value="formState.url" placeholder="输入链接地址" />
+      </a-form-item>
+
+      <a-form-item
+        label="网站名称"
+        name="urlName"
+        :rules="[{ required: true, message: 'Please input your urlName!' }]"
+      >
+        <a-input
+          v-model:value="formState.urlName"
+          placeholder="首页最多展示五个字"
+        />
+      </a-form-item>
+
+      <a-form-item v-bind="formTailLayout">
+        <a-button type="primary" @click="onCheck">确定</a-button>
+      </a-form-item>
+    </a-form>
+    <a-divider></a-divider>
+    <ul class="webList">
+      <li class="items">
+        <div class="link">
+          <a href="">
+            <img src="../assets/vue.svg" alt="" />
+            <span>技术开发</span>
+          </a>
+        </div>
+        <div class="info">
+          <a-button class="delete" type="text"><DeleteOutlined /></a-button>
+          <a-button type="text">
+            <a href=""><EllipsisOutlined /></a>
+          </a-button>
+        </div>
+      </li>
+      <li class="items">
+        <div class="link">
+          <a href="">
+            <img src="../assets/vue.svg" alt="" />
+            <span>技术开发</span>
+          </a>
+        </div>
+        <div class="info">
+          <a-button class="delete" type="text"><DeleteOutlined /></a-button>
+          <a-button type="text">
+            <a href=""><EllipsisOutlined /></a>
+          </a-button>
+        </div>
+      </li>
+    </ul>
   </a-modal>
+  
 </template>
 <script setup>
-import { ref, reactive, toRaw } from "vue";
-import { SearchOutlined, PlusOutlined } from "@ant-design/icons-vue";
+import { ref, reactive, toRaw, watch } from "vue";
+import {
+  SearchOutlined,
+  PlusOutlined,
+  DeleteOutlined,
+  EllipsisOutlined,
+} from "@ant-design/icons-vue";
 import { Form } from "ant-design-vue";
 const useForm = Form.useForm;
 defineProps({
@@ -99,9 +164,53 @@ const onSubmit = () => {
   console.log(value.value.value);
   console.log(valueText.value);
 };
+
+// 弹窗
+const formRef = ref();
+const formState = reactive({
+  url: "",
+  urlName: "",
+  checkNick: false,
+});
+watch(
+  () => formState.checkNick,
+  () => {
+    formRef.value.validateFields(["url"]);
+  },
+  {
+    flush: "post",
+  }
+);
+
+const onCheck = async () => {
+  try {
+    const values = await formRef.value.validateFields();
+    console.log("Success:", values);
+  } catch (errorInfo) {
+    console.log("Failed:", errorInfo);
+  }
+};
+
+const formItemLayout = {
+  labelCol: {
+    span: 4,
+  },
+  wrapperCol: {
+    span: 20,
+  },
+};
+const formTailLayout = {
+  wrapperCol: {
+    span: 20,
+    offset: 4,
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+.flex {
+  display: flex;
+}
 .navigationBarWrap {
   height: 200px;
   background-color: #1890ff;
@@ -139,6 +248,42 @@ const onSubmit = () => {
           margin-left: 6px;
           color: #fff;
         }
+      }
+    }
+  }
+}
+.webList {
+  .items {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:hover {
+      .delete {
+        opacity: 1 !important;
+      }
+    }
+    .link {
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 30px;
+        }
+        span {
+          margin-left: 15px;
+        }
+      }
+    }
+
+    .info {
+      .delete {
+        opacity: 0;
+        transform: 0.3s;
+      }
+      span {
+        font-size: 22px;
       }
     }
   }
