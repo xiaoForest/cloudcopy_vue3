@@ -81,7 +81,7 @@
     <ul class="webList">
       <li class="items">
         <div class="link">
-          <a href="">
+          <a href="" target="_blank">
             <img src="../assets/vue.svg" alt="" />
             <span>技术开发</span>
           </a>
@@ -89,13 +89,13 @@
         <div class="info">
           <a-button class="delete" type="text"><DeleteOutlined /></a-button>
           <a-button type="text">
-            <a href=""><EllipsisOutlined /></a>
+            <a href="" target="_blank"><EllipsisOutlined /></a>
           </a-button>
         </div>
       </li>
       <li class="items">
         <div class="link">
-          <a href="">
+          <a href="" target="_blank">
             <img src="../assets/vue.svg" alt="" />
             <span>技术开发</span>
           </a>
@@ -103,13 +103,12 @@
         <div class="info">
           <a-button class="delete" type="text"><DeleteOutlined /></a-button>
           <a-button type="text">
-            <a href=""><EllipsisOutlined /></a>
+            <a href="" target="_blank"><EllipsisOutlined /></a>
           </a-button>
         </div>
       </li>
     </ul>
   </a-modal>
-  
 </template>
 <script setup>
 import { ref, reactive, toRaw, watch } from "vue";
