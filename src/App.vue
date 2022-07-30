@@ -2,13 +2,17 @@
 <template>
   <Head />
   <NavigationBar />
-  <div>
+  <div class="containerFlex">
     <Menu />
+    <MainContent />
   </div>
 </template>
 
 <script setup>
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.containerFlex {
+  display: flex;
+}
 </style>
