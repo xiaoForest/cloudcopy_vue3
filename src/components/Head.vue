@@ -106,12 +106,7 @@
     </div>
   </div>
 
-  <a-modal
-    v-model:visible="visible"
-    title="微信登陆"
-    @ok="handleOk"
-    :footer="null"
-  >
+  <a-modal v-model:visible="visible" title="微信登陆" :footer="null">
     <div class="modalWeChat">
       <img src="../assets/code.jpg" alt="" />
       <p>微信扫码登陆</p>
