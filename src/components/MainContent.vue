@@ -1,5 +1,5 @@
 <template>
-  <div class="box-body" :style="'height:' + props.height + 'px;'">
+  <div class="editorWrap" :style="'height:' + props.height + 'px;'">
     <div id="codeBox"></div>
   </div>
 </template>
@@ -147,7 +147,7 @@ onMounted(() => {
   width: 100%;
   height: calc(100vh - 380px);
 }
-.box-body {
+.editorWrap {
   width: 100%;
 }
 </style>
