@@ -4,11 +4,20 @@
       <a-form layout="inline">
         <a-form-item>
           <a-select
-            v-model:value="value"
+            v-model:value="modelRef.language"
             label-in-value
             style="width: 150px"
             :options="options"
             @change="handleChange"
+          ></a-select>
+        </a-form-item>
+        <a-form-item>
+          <a-select
+            v-model:value="modelRef.ThemeValue"
+            label-in-value
+            style="width: 150px"
+            :options="optionsThem"
+            @change="ThemeChange"
           ></a-select>
         </a-form-item>
       </a-form>
@@ -27,16 +36,17 @@ import "monaco-editor/esm/vs/basic-languages/scss/scss.contribution"; // 代码�
 
 import { computed, ref, watch, toRaw, onMounted } from "vue";
 const editor = ref(null);
-const value = ref({
-  value: "javascript",
+const modelRef = ref({
+  language: "javascript",
+  ThemeValue: "vs-dark",
 });
-const language = ref(value.value.value);
+
 const initEditor = () => {
   // 初始化编辑器，确保dom已经渲染
   editor.value = monaco.editor.create(document.getElementById("codeEditBox"), {
     value: "", //编辑器初始显示文字
-    language: language.value, //此处使用的python，其他语言支持自行查阅demo
-    theme: "vs-dark", //官方自带三种主题vs, hc-black, or vs-dark
+    language: modelRef.value.language, //此处使用的python，其他语言支持自行查阅demo
+    theme: modelRef.value.ThemeValue, //官方自带三种主题vs, hc-black, or vs-dark
     selectOnLineNumbers: true, //显示行号
     roundedSelection: false,
     readOnly: false, // 只读
@@ -83,14 +93,34 @@ const options = ref([
     label: "php",
   },
 ]);
+const optionsThem = ref([
+  {
+    value: "vs",
+    label: "vs",
+  },
+  {
+    value: "vs-dark",
+    label: "vs-dark",
+  },
+  {
+    value: "hc-black",
+    label: "hc-black",
+  },
+]);
 
 const handleChange = (value) => {
   console.log(value.key); // { key: "lucy", label: "Lucy (101)" }
-  language.value = value.key;
+  modelRef.value.language = value.key;
   monaco.editor.setModelLanguage(
     toRaw(editor.value).getModel(),
-    language.value
+    modelRef.value.language
   );
+};
+const ThemeChange = (value) => {
+  console.log(value.key); // { key: "lucy", label: "Lucy (101)" }
+  modelRef.value.ThemeValue = value.key;
+  console.log(monaco.editor.setTheme);
+  monaco.editor.setTheme(modelRef.value.ThemeValue);
 };
 </script>
 <style lang="scss" scoped>
