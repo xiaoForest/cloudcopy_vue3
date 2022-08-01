@@ -4,7 +4,7 @@
       <a-form layout="inline">
         <a-form-item>
           <a-select
-           :default-value="language"
+            :default-value="language"
             labelInValue
             style="width: 150px"
             :options="options"
@@ -13,12 +13,37 @@
         </a-form-item>
         <a-form-item>
           <a-select
-           :default-value="ThemeValue"
+            :default-value="ThemeValue"
             labelInValue
             style="width: 150px"
             :options="optionsThem"
             @change="ThemeChange"
           ></a-select>
+        </a-form-item>
+        <a-form-item label="发布于：">
+          <span class="ant-form-text">2022-7-22 16:32:34</span>
+        </a-form-item>
+        <a-form-item label="访问码：">
+          <a-input
+            style="width: 80px"
+            placeholder=""
+            v-model:value="accessCode"
+            @blur="validate('name', { trigger: 'blur' }).catch(() => {})"
+          />
+        </a-form-item>
+        <a-form-item>
+          <a-button type="primary" size="default">
+            <template #icon>
+              <CloudDownloadOutlined @click="onCloudDown" />
+            </template>
+          </a-button>
+        </a-form-item>
+        <a-form-item>
+          <a-button type="primary" size="default">
+            <template #icon>
+              <CopyOutlined />
+            </template>
+          </a-button>
         </a-form-item>
       </a-form>
     </div>
@@ -33,13 +58,14 @@ import "monaco-editor/esm/vs/basic-languages/python/python.contribution"; // 代
 import "monaco-editor/esm/vs/basic-languages/css/css.contribution"; // 代码高亮
 import "monaco-editor/esm/vs/basic-languages/html/html.contribution"; // 代码高亮
 import "monaco-editor/esm/vs/basic-languages/scss/scss.contribution"; // 代码高亮
-
+import { message } from "ant-design-vue";
 import { computed, ref, watch, toRaw, onMounted } from "vue";
+import { CloudDownloadOutlined, CopyOutlined } from "@ant-design/icons-vue";
 const editor = ref(null);
 
 const language = ref("javascript");
 const ThemeValue = ref("vs-dark");
-
+const accessCode = ref("O7HJ88");
 const initEditor = () => {
   // 初始化编辑器，确保dom已经渲染
   editor.value = monaco.editor.create(document.getElementById("codeEditBox"), {
@@ -117,6 +143,11 @@ const handleChange = (value) => {
 const ThemeChange = (value) => {
   ThemeValue.value = value.key;
   monaco.editor.setTheme(ThemeValue.value);
+};
+
+const onCloudDown = (value) => {
+  let hide = message.loading("Action in progress..", 0);
+  setTimeout(hide, 2500);
 };
 </script>
 <style lang="scss" scoped>
