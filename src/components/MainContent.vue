@@ -1,16 +1,5 @@
 <template>
   <div class="box-body" :style="'height:' + props.height + 'px;'">
-    <div class="time">
-      <el-tooltip :content="'插入当前时间'" placement="bottom" effect="light">
-        <span
-          class="icon iconfont icon-shijian"
-          @click="range('\n#set( Time = Power.currentDateTime())')"
-        ></span>
-      </el-tooltip>
-      <el-tooltip :content="'添加注释'" placement="bottom" effect="light">
-        <el-icon class="icon fa" @click="tips()"><SemiSelect /></el-icon>
-      </el-tooltip>
-    </div>
     <div id="codeBox"></div>
   </div>
 </template>
@@ -29,12 +18,6 @@ const props = defineProps({
     default: 500,
   },
 });
-
-const tips = () => {
-  range(`
-#--注释--#
-      `);
-};
 
 const showInit = ref(true);
 const editor = ref(null);
@@ -137,7 +120,7 @@ const initEditor = () => {
     value: props.value,
     theme: "vs-dark",
     autoIndex: true,
-    language: "MyLanguage", // 语言类型
+    language: "javascript", // 语言类型
     tabCompletion: "on",
     cursorSmoothCaretAnimation: true,
     formatOnPaste: true,
@@ -159,43 +142,11 @@ onMounted(() => {
   initEditor();
 });
 </script>
-<style scoped>
+<style lang="scss" scoped>
 #codeBox {
   width: 100%;
-  height: 92%;
+  height: calc(100vh - 380px);
 }
-.code-container {
-  width: 100%;
-  height: 500px;
-  overflow: hidden;
-  border: 1px solid #eaeaea;
-}
-.monaco-editor .scroll-decoration {
-  box-shadow: none;
-}
-.time {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-bottom: none;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  height: 8%;
-  display: flex;
-  align-items: center;
-}
-.icon {
-  display: inline-block;
-  font-size: 20px !important;
-  margin: 0 10px;
-}
-.icon:hover {
-  color: #ffa500;
-  font-weight: bold;
-}
-.main {
-  padding: 0 !important;
-}
-
 .box-body {
   width: 100%;
 }
