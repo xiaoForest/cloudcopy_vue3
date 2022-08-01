@@ -2,7 +2,7 @@
 <template>
   <div class="MenuWrap">
     <a-form layout="inline">
-      <a-form-item label="" v-bind="validateInfos.region" style="width: 32%">
+      <a-form-item label="" v-bind="validateInfos.region" style="width: 30%">
         <a-select v-model:value="modelRef.region" placeholder="全部">
           <a-select-option value="1">私有</a-select-option>
           <a-select-option value="2">公开</a-select-option>
@@ -10,7 +10,7 @@
           <a-select-option value="4">分享</a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item label="" v-bind="validateInfos.name" style="width: 45%">
+      <a-form-item label="" v-bind="validateInfos.name" style="width: 42%">
         <a-input
           placeholder="关键字搜索"
           v-model:value="modelRef.name"
