@@ -22,7 +22,7 @@ import * as monaco from "monaco-editor";
 import { computed, ref, watch, toRaw, onMounted } from "vue";
 const editor = ref(null);
 const value = ref({
-  value: "javaScript",
+  value: "javascript",
 });
 const language = ref(value.value.value);
 const initEditor = () => {
@@ -57,16 +57,16 @@ const options = ref([
     label: "python",
   },
   {
-    value: "javaScript",
-    label: "javaScript",
+    value: "javascript",
+    label: "javascript",
   },
   {
-    value: "HTML",
-    label: "HTML",
+    value: "html",
+    label: "html",
   },
   {
-    value: "CSS",
-    label: "CSS",
+    value: "css",
+    label: "css",
   },
 ]);
 
