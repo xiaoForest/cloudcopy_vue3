@@ -17,7 +17,12 @@
   </div>
 </template>
 <script setup>
-import * as monaco from "monaco-editor";
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
+import "monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution"; // 代码高亮
+import "monaco-editor/esm/vs/basic-languages/php/php.contribution"; // 代码高亮
+import "monaco-editor/esm/vs/basic-languages/python/python.contribution"; // 代码高亮
+import "monaco-editor/esm/vs/basic-languages/css/css.contribution"; // 代码高亮
+import "monaco-editor/esm/vs/basic-languages/html/html.contribution"; // 代码高亮
 
 import { computed, ref, watch, toRaw, onMounted } from "vue";
 const editor = ref(null);
@@ -67,6 +72,10 @@ const options = ref([
   {
     value: "css",
     label: "css",
+  },
+  {
+    value: "php",
+    label: "php",
   },
 ]);
 
