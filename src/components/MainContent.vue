@@ -4,8 +4,8 @@
       <a-form layout="inline">
         <a-form-item>
           <a-select
-            v-model:value="modelRef.language"
-            label-in-value
+           :default-value="language"
+            labelInValue
             style="width: 150px"
             :options="options"
             @change="handleChange"
@@ -13,8 +13,8 @@
         </a-form-item>
         <a-form-item>
           <a-select
-            v-model:value="modelRef.ThemeValue"
-            label-in-value
+           :default-value="ThemeValue"
+            labelInValue
             style="width: 150px"
             :options="optionsThem"
             @change="ThemeChange"
@@ -36,17 +36,16 @@ import "monaco-editor/esm/vs/basic-languages/scss/scss.contribution"; // 代码�
 
 import { computed, ref, watch, toRaw, onMounted } from "vue";
 const editor = ref(null);
-const modelRef = ref({
-  language: "javascript",
-  ThemeValue: "vs-dark",
-});
+
+const language = ref("javascript");
+const ThemeValue = ref("vs-dark");
 
 const initEditor = () => {
   // 初始化编辑器，确保dom已经渲染
   editor.value = monaco.editor.create(document.getElementById("codeEditBox"), {
     value: "", //编辑器初始显示文字
-    language: modelRef.value.language, //此处使用的python，其他语言支持自行查阅demo
-    theme: modelRef.value.ThemeValue, //官方自带三种主题vs, hc-black, or vs-dark
+    language: language.value, //此处使用的python，其他语言支持自行查阅demo
+    theme: ThemeValue.value, //官方自带三种主题vs, hc-black, or vs-dark
     selectOnLineNumbers: true, //显示行号
     roundedSelection: false,
     readOnly: false, // 只读
@@ -109,18 +108,15 @@ const optionsThem = ref([
 ]);
 
 const handleChange = (value) => {
-  console.log(value.key); // { key: "lucy", label: "Lucy (101)" }
-  modelRef.value.language = value.key;
+  language.value = value.key;
   monaco.editor.setModelLanguage(
     toRaw(editor.value).getModel(),
-    modelRef.value.language
+    language.value
   );
 };
 const ThemeChange = (value) => {
-  console.log(value.key); // { key: "lucy", label: "Lucy (101)" }
-  modelRef.value.ThemeValue = value.key;
-  console.log(monaco.editor.setTheme);
-  monaco.editor.setTheme(modelRef.value.ThemeValue);
+  ThemeValue.value = value.key;
+  monaco.editor.setTheme(ThemeValue.value);
 };
 </script>
 <style lang="scss" scoped>
@@ -133,7 +129,7 @@ const ThemeChange = (value) => {
   }
   .codeEditBox {
     width: 100%;
-    height: calc(100vh - 480px);
+    height: calc(100vh - 400px);
   }
 }
 </style>
