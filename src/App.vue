@@ -5,6 +5,7 @@
   <div class="containerFlex">
     <Menu />
     <MainContent ref="monacoEdit" />
+    <PhotoSharing />
   </div>
 </template>
 
@@ -15,5 +16,6 @@ import { computed, ref, watch, toRaw } from "vue";
 <style lang="scss" scoped>
 .containerFlex {
   display: flex;
+  width: 100%;
 }
 </style>
