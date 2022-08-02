@@ -18,8 +18,8 @@ const showMenu = ref(false);
 const showPhoto = ref(false);
 watchEffect(() => {
   if (changeValue.value != undefined) {
-    showMenu.value = changeValue.value.checked1;
-    showPhoto.value = changeValue.value.checked3;
+    showMenu.value = changeValue.value.checked3;
+    showPhoto.value = changeValue.value.checked1;
   }
 });
 </script>
