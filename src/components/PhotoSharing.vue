@@ -9,26 +9,64 @@
     </div>
     <div class="mainImg">
       <a-image
-        :width="280"
+        :width="265"
         src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
       />
-
+      <div class="views">
+        <span class="num">32423</span>
+        <EyeOutlined style="font-size: 18px; color: #1890ff" />
+      </div>
+      <div class="commentHead">
+        <span class="title">评论</span>
+        <div class="tabs">
+          <a-button type="text">热度</a-button>
+          <a-button type="link">最新</a-button>
+        </div>
+      </div>
       <a-list
         v-if="comments.length"
         :data-source="comments"
-        :header="`${comments.length} ${
-          comments.length > 1 ? 'replies' : 'reply'
-        }`"
         item-layout="horizontal"
       >
         <template #renderItem="{ item }">
           <a-list-item>
-            <a-comment
-              :author="item.author"
-              :avatar="item.avatar"
-              :content="item.content"
-              :datetime="item.datetime"
-            />
+            <a-comment>
+              <template #actions>
+                <span key="comment-basic-like">
+                  <a-tooltip title="Like">
+                    <template v-if="action === 'liked'">
+                      <LikeFilled @click="like" />
+                    </template>
+                    <template v-else>
+                      <LikeOutlined @click="like" />
+                    </template>
+                  </a-tooltip>
+                  <span style="padding-left: 8px; cursor: auto">
+                    {{ likes }}
+                  </span>
+                </span>
+                <span key="comment-basic-reply-to">Reply to</span>
+              </template>
+              <template #author
+                ><a>{{ item.author }}</a></template
+              >
+              <template #avatar>
+                <a-avatar
+                  src="https://joeschmoe.io/api/v1/random"
+                  :alt="item.author"
+                />
+              </template>
+              <template #content>
+                <p>
+                  {{ item.content }}
+                </p>
+              </template>
+              <template #datetime>
+                <a-tooltip :title="dayjs().format('YYYY-MM-DD HH:mm:ss')">
+                  <span>{{ item.datetime }}</span>
+                </a-tooltip>
+              </template>
+            </a-comment>
           </a-list-item>
         </template>
       </a-list>
@@ -38,7 +76,7 @@
         </template>
         <template #content>
           <a-form-item>
-            <a-textarea v-model:value="value" :rows="4" />
+            <a-textarea v-model:value="value" :rows="2" />
           </a-form-item>
           <a-form-item>
             <a-button
@@ -57,16 +95,33 @@
 </template>
 <script setup>
 import { ref, reactive, toRaw, watch } from "vue";
-import { DoubleRightOutlined } from "@ant-design/icons-vue";
+import {
+  DoubleRightOutlined,
+  LikeFilled,
+  LikeOutlined,
+  DislikeFilled,
+  DislikeOutlined,
+  EyeOutlined,
+} from "@ant-design/icons-vue";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
+
+const likes = ref(0);
+
+const action = ref();
+
+const like = () => {
+  likes.value = 1;
+  dislikes.value = 0;
+  action.value = "liked";
+};
 
 const comments = ref([
   {
     author: "Han Solo",
     avatar: "https://joeschmoe.io/api/v1/random",
-    content: '哈哈哈哈',
+    content: "哈哈哈哈",
     datetime: dayjs().fromNow(),
   },
 ]);
@@ -97,8 +152,11 @@ const handleSubmit = () => {
 
 <style lang="scss" scoped>
 .photoWrap {
-  width: 300px;
+  width: 320px;
+  max-height: calc(100vh - 280px);
+
   border-left: 1px solid #f0f0f0;
+  overflow-y: auto;
   .topHead {
     height: 73px;
     padding: 20px 0 20px 20px;
@@ -112,6 +170,31 @@ const handleSubmit = () => {
   }
   .mainImg {
     padding: 20px;
+    .views {
+      padding: 10px 0 10px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .num {
+        color: #1890ff;
+        margin-right: 5px;
+        font-size: 16px;
+      }
+    }
+    .commentHead {
+      padding: 10px;
+      border: 1px solid #f6f6f6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .tabs {
+        button {
+          &:hover {
+            color: #1890ff;
+          }
+        }
+      }
+    }
   }
 }
 </style>

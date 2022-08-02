@@ -21,7 +21,7 @@ import { computed, ref, watch, toRaw } from "vue";
     width: 20%;
   }
   .boxes2 {
-    width: calc(80% - 300px);
+    width: calc(80% - 320px);
   }
   .boxes3 {
     width: 320px;
