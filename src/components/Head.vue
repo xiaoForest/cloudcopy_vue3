@@ -205,7 +205,7 @@ const LoggedOut = () => {
 };
 // 登陆后 A
 
-defineExpose({ checked1, checked3 });
+defineExpose({ checked1, checked2, checked3 });
 </script>
 
 <style lang="scss" scoped>
@@ -302,8 +302,6 @@ defineExpose({ checked1, checked3 });
     border-bottom: 1px #f0f0f0 solid;
     &:first-child {
       margin-top: 0;
-    }
-    .text {
     }
     .time {
       display: block;
