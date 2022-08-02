@@ -58,16 +58,9 @@ import "monaco-editor/esm/vs/basic-languages/python/python.contribution"; // 代
 import "monaco-editor/esm/vs/basic-languages/css/css.contribution"; // 代码高亮
 import "monaco-editor/esm/vs/basic-languages/html/html.contribution"; // 代码高亮
 import "monaco-editor/esm/vs/basic-languages/scss/scss.contribution"; // 代码高亮
-import { message } from "ant-design-vue";
-import "ant-design-vue/es/message/style/css";
 
 import { computed, ref, watch, toRaw, onMounted } from "vue";
 import { CloudDownloadOutlined, CopyOutlined } from "@ant-design/icons-vue";
-message.config({
-  duration: 2, // 提示时常单位为s
-  top: "40px", // 距离顶部的位置
-  maxCount: 3, // 最多显示提示信息条数(后面的会替换前面的提示)
-});
 
 const editor = ref(null);
 
@@ -154,10 +147,10 @@ const ThemeChange = (value) => {
 };
 
 const onCloudDown = (value) => {
-  message.warning("访问码过期或无效");
+  $message.warning("访问码过期或无效");
 };
 const onCopy = (value) => {
-  message.success("已复制访问码");
+  $message.success("已复制访问码");
 };
 </script>
 <style lang="scss" scoped>
