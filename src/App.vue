@@ -3,9 +3,9 @@
   <Head />
   <NavigationBar />
   <div class="containerFlex">
-    <Menu />
-    <MainContent ref="monacoEdit" />
-    <PhotoSharing />
+    <Menu class="boxes1" />
+    <MainContent ref="monacoEdit" class="boxes2" />
+    <PhotoSharing class="boxes3" />
   </div>
 </template>
 
@@ -17,5 +17,14 @@ import { computed, ref, watch, toRaw } from "vue";
 .containerFlex {
   display: flex;
   width: 100%;
+  .boxes1 {
+    width: 20%;
+  }
+  .boxes2 {
+    width: 60%;
+  }
+  .boxes3 {
+    width: 20%;
+  }
 }
 </style>

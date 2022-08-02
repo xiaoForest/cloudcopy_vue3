@@ -1,13 +1,15 @@
 
 <template>
-  <div>我是每日一图</div>
+  <div class="photoWrap">
+    <div>我是每日一图</div>
+  </div>
 </template>
 <script setup>
 import { ref } from "vue";
 </script>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
+.photoWrap {
+  width: 100%;
 }
 </style>

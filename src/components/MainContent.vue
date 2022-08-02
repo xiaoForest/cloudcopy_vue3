@@ -48,6 +48,23 @@
       </a-form>
     </div>
     <div id="codeEditBox" class="codeEditBox"></div>
+    <div class="codeEditBottom">
+      <a-dropdown-button>
+        <CloudUploadOutlined />
+        <span @click.prevent>推送到云</span>
+        <template #overlay>
+          <a-menu>
+            <a-menu-item v-for="(item, index) in optionsPush">
+              <span>{{ item.label }}</span>
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown-button>
+      <a-button type="primary">
+        <template #icon><ShareAltOutlined /></template>
+        分享链接
+      </a-button>
+    </div>
   </div>
 </template>
 <script setup>
@@ -60,7 +77,13 @@ import "monaco-editor/esm/vs/basic-languages/html/html.contribution"; // 代码�
 import "monaco-editor/esm/vs/basic-languages/scss/scss.contribution"; // 代码高亮
 
 import { computed, ref, watch, toRaw, onMounted } from "vue";
-import { CloudDownloadOutlined, CopyOutlined } from "@ant-design/icons-vue";
+import {
+  CloudDownloadOutlined,
+  CopyOutlined,
+  CloudUploadOutlined,
+  DownOutlined,
+  ShareAltOutlined,
+} from "@ant-design/icons-vue";
 
 const editor = ref(null);
 
@@ -133,6 +156,21 @@ const optionsThem = ref([
     label: "hc-black",
   },
 ]);
+const optionsPush = ref([
+  {
+    value: "ls",
+    label: "临时存储",
+  },
+  {
+    value: "sy",
+    label: "私有",
+  },
+  {
+    value: "gk",
+    label: "公开",
+  },
+]);
+const push = ref("sy");
 
 const handleChange = (value) => {
   language.value = value.key;
@@ -163,7 +201,15 @@ const onCopy = (value) => {
   }
   .codeEditBox {
     width: 100%;
-    height: calc(100vh - 400px);
+    height: calc(100vh - 450px);
+  }
+  .codeEditBottom {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    .ant-btn-group {
+      margin-right: 20px;
+    }
   }
 }
 </style>
