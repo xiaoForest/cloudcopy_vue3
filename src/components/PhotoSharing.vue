@@ -7,6 +7,12 @@
         <DoubleRightOutlined style="font-size: 26px" />
       </a-button>
     </div>
+    <div class="mainImg">
+      <a-image
+        :width="280"
+        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+      />
+    </div>
   </div>
 </template>
 <script setup>
@@ -16,7 +22,7 @@ import { DoubleRightOutlined } from "@ant-design/icons-vue";
 
 <style lang="scss" scoped>
 .photoWrap {
-  width: 100%;
+  width: 300px;
   border-left: 1px solid #f0f0f0;
   .topHead {
     height: 73px;
@@ -28,6 +34,9 @@ import { DoubleRightOutlined } from "@ant-design/icons-vue";
     .ant-typography {
       margin-bottom: 0;
     }
+  }
+  .mainImg {
+    padding: 20px;
   }
 }
 </style>
