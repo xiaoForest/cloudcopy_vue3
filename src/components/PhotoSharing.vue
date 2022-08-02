@@ -4,12 +4,12 @@
     <div class="topHead">
       <a-typography-title :level="4">每日一图</a-typography-title>
       <a-button type="link">
-        <DoubleRightOutlined style="font-size: 26px" />
+        <DoubleRightOutlined style="font-size: 26px" @click="showPhoto" />
       </a-button>
     </div>
     <div class="mainImg">
       <a-image
-        :width="265"
+        :width="imageWidth"
         src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
       />
       <div class="views">
@@ -148,11 +148,12 @@ const handleSubmit = () => {
     value.value = "";
   }, 1000);
 };
+const imageWidth = ref(265);
+const showPhoto = () => {};
 </script>
 
 <style lang="scss" scoped>
 .photoWrap {
-  width: 320px;
   max-height: calc(100vh - 280px);
 
   border-left: 1px solid #f0f0f0;

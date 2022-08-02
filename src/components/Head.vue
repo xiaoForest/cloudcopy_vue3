@@ -116,7 +116,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, watchEffect, defineExpose } from "vue";
 import {
   BellOutlined,
   SettingOutlined,
@@ -204,6 +204,8 @@ const LoggedOut = () => {
   showLogIn.value = true;
 };
 // 登陆后 A
+
+defineExpose({ checked1, checked3 });
 </script>
 
 <style lang="scss" scoped>
