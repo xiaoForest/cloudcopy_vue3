@@ -65,6 +65,11 @@
         分享链接
       </a-button>
     </div>
+    <div class="archivalInformation">
+      <a href="https://beian.miit.gov.cn/#/Integrated/index">
+        津ICP备20003032号-5
+      </a>
+    </div>
   </div>
 </template>
 <script setup>
@@ -209,6 +214,14 @@ const onCopy = (value) => {
     justify-content: center;
     .ant-btn-group {
       margin-right: 20px;
+    }
+  }
+  .archivalInformation {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    a {
+      color: rgb(238, 95, 0);
     }
   }
 }
