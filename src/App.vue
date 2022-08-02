@@ -29,10 +29,10 @@ watchEffect(() => {
   display: flex;
   width: 100%;
   .boxes1 {
-    width: 20%;
+    width: 320px;
   }
   .boxes2 {
-    width: calc(80% - 320px);
+    width: calc(100% - 640px);
   }
   .boxes3 {
     width: 320px;
