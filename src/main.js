@@ -7,6 +7,8 @@ import {
     message
 } from "ant-design-vue";
 import "ant-design-vue/es/message/style/css";
+import "ant-design-vue/es/typography/style/css";
+
 message.config({
     duration: 2, // 提示时常单位为s
     top: "40px", // 距离顶部的位置
