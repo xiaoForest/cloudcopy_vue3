@@ -114,9 +114,9 @@ onMounted(() => {
   var gitalk = new Gitalk({
     clientID: "003e552e3bdf6951bec1",
     clientSecret: "304777dc3bb888af562663c84cb2f518e6a62c0a",
-    repo: "https://github.com/xiaoForest/gitalk",
+    repo: "gitalk",
     owner: "xiaoForest",
-    admin: [],
+    admin: ['xiaoForest'],
     id: location.pathname, // Ensure uniqueness and length less than 50
     distractionFreeMode: false, // Facebook-like distraction free mode
   });
