@@ -111,7 +111,7 @@ import Gitalk from "gitalk";
 
 dayjs.extend(relativeTime);
 onMounted(() => {
-  var gitalk = new Gitalk({
+  let gitalk = new Gitalk({
     clientID: "003e552e3bdf6951bec1",
     clientSecret: "304777dc3bb888af562663c84cb2f518e6a62c0a",
     repo: "cloudcopy_gitalk",
