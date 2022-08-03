@@ -116,7 +116,7 @@ onMounted(() => {
     clientSecret: "304777dc3bb888af562663c84cb2f518e6a62c0a",
     repo: "cloudcopy_gitalk",
     owner: "xiaoForest",
-    admin: ['xiaoForest'],
+    admin: ["xiaoForest", "dinggeonly"],
     id: location.pathname, // Ensure uniqueness and length less than 50
     distractionFreeMode: false, // Facebook-like distraction free mode
   });
