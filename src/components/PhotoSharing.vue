@@ -16,14 +16,15 @@
         <span class="num">32423</span>
         <EyeOutlined style="font-size: 18px; color: #1890ff" />
       </div>
-      <div class="commentHead">
+      <div id="gitalk-container"></div>
+      <!-- <div class="commentHead">
         <span class="title">评论</span>
         <div class="tabs">
           <a-button type="text">热度</a-button>
           <a-button type="link">最新</a-button>
         </div>
-      </div>
-      <a-list
+      </div> -->
+      <!-- <a-list
         v-if="comments.length"
         :data-source="comments"
         item-layout="horizontal"
@@ -89,12 +90,12 @@
             </a-button>
           </a-form-item>
         </template>
-      </a-comment>
+      </a-comment> -->
     </div>
   </div>
 </template>
 <script setup>
-import { ref, reactive, toRaw, watch } from "vue";
+import { ref, reactive, toRaw, watch, onMounted } from "vue";
 import {
   DoubleRightOutlined,
   LikeFilled,
@@ -105,8 +106,23 @@ import {
 } from "@ant-design/icons-vue";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-dayjs.extend(relativeTime);
+import "gitalk/dist/gitalk.css";
+import Gitalk from "gitalk";
 
+dayjs.extend(relativeTime);
+onMounted(() => {
+  var gitalk = new Gitalk({
+    clientID: "003e552e3bdf6951bec1",
+    clientSecret: "304777dc3bb888af562663c84cb2f518e6a62c0a",
+    repo: "https://github.com/xiaoForest/gitalk",
+    owner: "xiaoForest",
+    admin: [],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false, // Facebook-like distraction free mode
+  });
+
+  gitalk.render("gitalk-container");
+});
 const likes = ref(0);
 
 const action = ref();
