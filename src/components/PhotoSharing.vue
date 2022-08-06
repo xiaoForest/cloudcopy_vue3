@@ -3,8 +3,8 @@
   <div class="photoWrap">
     <div class="topHead">
       <a-typography-title :level="4">每日一图</a-typography-title>
-      <a-button type="link">
-        <DoubleRightOutlined style="font-size: 26px" @click="showPhoto" />
+      <a-button type="link" @click="onShowPhoto">
+        <DoubleRightOutlined style="font-size: 26px" />
       </a-button>
     </div>
     <div class="mainImg">
@@ -165,7 +165,12 @@ const handleSubmit = () => {
   }, 1000);
 };
 const imageWidth = ref(265);
-const showPhoto = () => {};
+const showPhoto = ref(false);
+const onShowPhoto = () => {
+  $message.warning("开发中");
+  // showPhoto.value = !showPhoto.value;
+};
+defineExpose({ showPhoto });
 </script>
 
 <style lang="scss" scoped>
