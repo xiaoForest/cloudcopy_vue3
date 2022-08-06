@@ -116,6 +116,28 @@ const initEditor = () => {
   editor.value.onDidChangeModelContent((val) => {
     console.log(val.changes[0].text);
   });
+
+  // 创建代码提醒
+  monaco.languages.registerCompletionItemProvider("javascript", {
+    provideCompletionItems: function (model, position) {
+      // find out if we are completing a property in the 'dependencies' object.
+      var textUntilPosition = model.getValueInRange({
+        startLineNumber: 1,
+        startColumn: 1,
+        endLineNumber: position.lineNumber,
+        endColumn: position.column,
+      });
+      var suggestions = [];
+      var word = model.getWordUntilPosition(position);
+      var range = {
+        startLineNumber: position.lineNumber,
+        endLineNumber: position.lineNumber,
+        startColumn: word.startColumn,
+        endColumn: word.endColumn,
+      };
+      return { suggestions: suggestions };
+    },
+  });
 };
 onMounted(() => {
   initEditor();
@@ -219,7 +241,7 @@ const onCopy = (value) => {
   .archivalInformation {
     display: flex;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
     a {
       color: rgb(238, 95, 0);
     }
