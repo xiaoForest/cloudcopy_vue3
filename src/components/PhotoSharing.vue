@@ -170,12 +170,11 @@ const showPhoto = () => {};
 
 <style lang="scss" scoped>
 .photoWrap {
-  max-height: calc(100vh - 280px);
-
   border-left: 1px solid #f0f0f0;
-  overflow-y: auto;
+  max-height: calc(100vh - 280px);
+  overflow: hidden;
   .topHead {
-    height: 73px;
+    height: 70px;
     padding: 20px 0 20px 20px;
     border-bottom: 1px solid #f0f0f0;
     display: flex;
@@ -187,6 +186,8 @@ const showPhoto = () => {};
   }
   .mainImg {
     padding: 20px;
+    max-height: calc(100vh - 390px);
+    overflow-y: auto;
     .views {
       padding: 10px 0 10px 10px;
       display: flex;
