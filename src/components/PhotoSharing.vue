@@ -186,7 +186,7 @@ const showPhoto = () => {};
   }
   .mainImg {
     padding: 20px;
-    max-height: calc(100vh - 390px);
+    max-height: calc(100vh - 350px);
     overflow-y: auto;
     .views {
       padding: 10px 0 10px 10px;
